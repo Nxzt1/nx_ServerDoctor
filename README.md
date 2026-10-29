@@ -1,4 +1,73 @@
-# NX_ServerDoctor
+
+# NX_ServerDoctor<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">NX_ServerDoctor — free server diagnostics</title>
+  <desc id="desc">Promotional banner with a diagnostics panel and fictional sample data.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#11121a"/><stop offset="1" stop-color="#1c1630"/></linearGradient>
+    <linearGradient id="purple" x2="0" y2="1"><stop stop-color="#a77aff"/><stop offset="1" stop-color="#7139d8"/></linearGradient>
+    <linearGradient id="line" x2="1"><stop stop-color="#9a61ff" stop-opacity="0"/><stop offset=".5" stop-color="#9a61ff" stop-opacity=".8"/><stop offset="1" stop-color="#9a61ff" stop-opacity="0"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#05040b" flood-opacity=".5"/></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1390" cy="120" r="340" fill="#753ce0" opacity=".10"/><circle cx="130" cy="840" r="350" fill="#8149e8" opacity=".07"/>
+  <path d="M0 750 Q410 660 800 760 T1600 730" fill="none" stroke="#8f56ec" stroke-opacity=".12" stroke-width="2"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect x="94" y="80" width="58" height="58" rx="16" fill="url(#purple)"/>
+    <text x="123" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="white">NX</text>
+    <text x="174" y="111" font-size="20" font-weight="800" letter-spacing="2" fill="#f4efff">NX TOOLS</text>
+    <text x="1510" y="111" text-anchor="end" font-size="17" font-weight="700" letter-spacing="2" fill="#b998ff">FREE · OPEN SOURCE</text>
+    <text x="96" y="272" font-size="18" font-weight="700" letter-spacing="4" fill="#b997ff">KEEP YOUR SERVER RUNNING SMOOTHLY</text>
+    <text x="92" y="360" font-size="74" font-weight="800" letter-spacing="-2" fill="#fff">NX_ServerDoctor</text>
+    <text x="96" y="414" font-size="25" fill="#c2bdcf">Local resource diagnostics for FiveM</text>
+    <g transform="translate(96 468)">
+      <rect width="225" height="45" rx="22" fill="#292039" stroke="#6545a1"/>
+      <circle cx="24" cy="22" r="5" fill="#a77aff"/><text x="41" y="28" font-size="15" font-weight="700" letter-spacing="1" fill="#e6d9ff">LOCAL SCAN</text>
+      <rect x="240" width="217" height="45" rx="22" fill="#202b29" stroke="#416d5a"/>
+      <circle cx="264" cy="22" r="5" fill="#54d69a"/><text x="281" y="28" font-size="15" font-weight="700" letter-spacing="1" fill="#d6ffeb">SAMPLE DATA</text>
+    </g>
+    <text x="97" y="650" font-size="16" fill="#878194">Fictional paths and names · No private data</text>
+
+    <g transform="translate(660 190)" filter="url(#shadow)">
+      <rect width="850" height="540" rx="20" fill="#111117" stroke="#3b3746" stroke-width="2"/>
+      <path d="M20 0H830a20 20 0 0 1 20 20v55H0V20A20 20 0 0 1 20 0Z" fill="#1b1a22"/>
+      <rect x="28" y="20" width="36" height="36" rx="10" fill="url(#purple)"/><text x="46" y="44" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">NX</text>
+      <text x="78" y="43" font-size="19" font-weight="800" fill="#f4f0fa">NX_ServerDoctor</text>
+      <circle cx="410" cy="38" r="5" fill="#52d69a"/><text x="424" y="43" font-size="12" font-weight="700" letter-spacing="1" fill="#c9c2d3">SCAN COMPLETE</text>
+      <text x="812" y="43" text-anchor="end" font-size="12" fill="#928b9c">DEMO</text>
+      <rect x="18" y="94" width="210" height="410" rx="12" fill="#1a1921" stroke="#34313d"/>
+      <text x="38" y="131" font-size="14" font-weight="700" letter-spacing="1" fill="#d9d3e3">SUMMARY</text>
+      <rect x="38" y="149" width="170" height="1" fill="#393441"/>
+      <text x="38" y="183" font-size="11" font-weight="700" letter-spacing="1" fill="#928b9d">TOTAL FINDINGS</text>
+      <text x="38" y="240" font-size="52" font-weight="800" fill="#ad84ff">08</text>
+      <text x="38" y="265" font-size="12" fill="#aaa3b6">Sample items</text>
+      <rect x="32" y="291" width="182" height="38" rx="8" fill="#302241" stroke="#7551b7"/>
+      <circle cx="46" cy="310" r="4" fill="#a979ff"/><text x="59" y="315" font-size="13" fill="#eee7f8">All</text><text x="198" y="315" text-anchor="end" font-size="12" fill="#e9ddff">08</text>
+      <circle cx="46" cy="353" r="4" fill="#fa4e71"/><text x="59" y="358" font-size="13" fill="#aaa3b6">Errors</text><text x="198" y="358" text-anchor="end" font-size="12" fill="#aaa3b6">00</text>
+      <circle cx="46" cy="397" r="4" fill="#ffb21f"/><text x="59" y="402" font-size="13" fill="#aaa3b6">Warnings</text><text x="198" y="402" text-anchor="end" font-size="12" fill="#aaa3b6">03</text>
+      <circle cx="46" cy="441" r="4" fill="#56a6ff"/><text x="59" y="446" font-size="13" fill="#aaa3b6">Info</text><text x="198" y="446" text-anchor="end" font-size="12" fill="#aaa3b6">05</text>
+      <text x="263" y="117" font-size="11" font-weight="700" letter-spacing="1" fill="#a59dac">SCAN RESULTS</text>
+      <text x="263" y="151" font-size="27" font-weight="800" fill="#f6f2fa">FINDINGS</text>
+      <rect x="263" y="174" width="561" height="86" rx="10" fill="#17161d" stroke="#393540"/><rect x="263" y="174" width="4" height="86" rx="2" fill="#ffb21f"/>
+      <text x="285" y="202" font-size="15" font-weight="700" fill="#e9e3ef">Multiple resources use the same name</text><rect x="736" y="187" width="72" height="23" rx="5" fill="#38270e" stroke="#805410"/><text x="772" y="203" text-anchor="middle" font-size="9" font-weight="700" fill="#ffc04a">WARNING</text>
+      <text x="285" y="229" font-size="12" fill="#b994ff">[SAMPLE_RESOURCE]/fxmanifest.lua</text><text x="285" y="248" font-size="11" fill="#9b95a4">Review the sample configuration before starting.</text>
+      <rect x="263" y="274" width="561" height="86" rx="10" fill="#17161d" stroke="#393540"/><rect x="263" y="274" width="4" height="86" rx="2" fill="#ffb21f"/>
+      <text x="285" y="302" font-size="15" font-weight="700" fill="#e9e3ef">Sample dependency not detected</text><rect x="736" y="287" width="72" height="23" rx="5" fill="#38270e" stroke="#805410"/><text x="772" y="303" text-anchor="middle" font-size="9" font-weight="700" fill="#ffc04a">WARNING</text>
+      <text x="285" y="329" font-size="12" fill="#b994ff">[FAKE_RESOURCE] → [DEMO_DEPENDENCY]</text><text x="285" y="348" font-size="11" fill="#9b95a4">Names and paths replaced with fictional data.</text>
+      <rect x="263" y="374" width="561" height="86" rx="10" fill="#17161d" stroke="#393540"/><rect x="263" y="374" width="4" height="86" rx="2" fill="#4f9ef5"/>
+      <text x="285" y="402" font-size="15" font-weight="700" fill="#e9e3ef">Scan completed successfully</text><rect x="748" y="387" width="60" height="23" rx="5" fill="#15283c" stroke="#285b88"/><text x="778" y="403" text-anchor="middle" font-size="10" font-weight="700" fill="#79baff">INFO</text>
+      <text x="285" y="429" font-size="12" fill="#b994ff">[SAMPLE_PATH]/config.lua</text><text x="285" y="448" font-size="11" fill="#9b95a4">Files checked: 120 · Duration: 1.8 s</text>
+      <path d="M18 480H832" stroke="#34313d"/><text x="32" y="501" font-size="10" letter-spacing="1" fill="#777181">FICTIONAL DEMO DATA</text>
+    </g>
+    <rect x="95" y="738" width="1415" height="1" fill="url(#line)"/>
+    <text x="96" y="792" font-size="15" font-weight="700" letter-spacing="2" fill="#c9b4ff">NX SERVERDOCTOR</text>
+    <text x="1510" y="792" text-anchor="end" font-size="14" fill="#8e8798">DIAGNOSTICS · PRIVACY · FIVEM</text><text x="1510" y="830" text-anchor="end" font-size="14" font-weight="700" letter-spacing="1" fill="#b998ff">By Nxsty</text>
+  </g>
+</svg>
+
+
+
+
+
 
 Made by **Nxsty**. Free to use, but not open source: read the [license](LICENSE) before sharing it.
 
