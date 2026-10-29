@@ -1,3 +1,4 @@
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/64526eb5-83be-4074-a460-1c87b000b91b" />
 
 # NX_ServerDoctor
 
@@ -55,6 +56,9 @@ The panel is part of `NX_ServerDoctor`: `/nxcheck` opens it directly, and `/nxch
 ## Permissions
 
 The command is registered without a FiveM restriction, and the resource itself checks on the server, on every use, that the requester has the `Config.Permission.ace` permission (default `nxdoctor.use`). The server sends the report only to the authorized admin who requested it; the NUI has no callbacks that run checks or server actions.
+
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/f28082a7-fe1c-4eca-9a56-9c7291b60659" />
+
 
 ```cfg
 # Recommended: your admin group only
