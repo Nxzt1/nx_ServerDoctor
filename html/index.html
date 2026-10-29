@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Nxsty">
+  <meta name="generator" content="sd 4e585354592d53442d4443463345463441">
+  <title>NX ServerDoctor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="root" class="doctor-root" hidden aria-hidden="true">
+    <div id="scrim" class="doctor-scrim"></div>
+    <section id="shell" class="doctor-shell nx-panel" aria-label="Informe de NX ServerDoctor">
+      <header class="doctor-top">
+        <div class="doctor-brand">
+          <span class="doctor-logo" aria-hidden="true">NX</span>
+          <div class="doctor-wordmark"><strong>SERVERDOCTOR</strong><span>DIAGNÓSTICO DEL SERVIDOR</span></div>
+        </div>
+        <div class="doctor-runmeta">
+          <span class="nx-dot is-good"></span><span id="run-status">REVISIÓN COMPLETADA</span>
+          <b id="run-meta">0 recursos · 0 ms</b>
+        </div>
+        <button id="close" class="nx-iconbtn doctor-close" type="button" aria-label="Cerrar informe" title="Cerrar (ESC)">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg>
+        </button>
+      </header>
+
+      <div class="doctor-body">
+        <aside class="doctor-rail nx-card">
+          <div class="nx-head rail-head"><span class="nx-title">RESUMEN</span><span class="nx-badge is-soft" id="count-all">0</span></div>
+          <div class="rail-summary">
+            <span class="nx-label">HALLAZGOS TOTALES</span>
+            <strong class="nx-num" id="total-count">0</strong>
+            <span id="total-caption">Sin incidencias detectadas</span>
+          </div>
+          <hr class="nx-sep">
+          <nav class="doctor-filters" aria-label="Filtrar por gravedad">
+            <button class="filter-row is-active" data-filter="todos" type="button">
+              <span class="filter-mark all-mark"></span><span>Todos</span><b id="filter-all">0</b>
+            </button>
+            <button class="filter-row" data-filter="error" type="button">
+              <span class="filter-mark is-bad"></span><span>Errores</span><b id="count-error">0</b>
+            </button>
+            <button class="filter-row" data-filter="advertencia" type="button">
+              <span class="filter-mark is-warn"></span><span>Avisos</span><b id="count-warning">0</b>
+            </button>
+            <button class="filter-row" data-filter="informacion" type="button">
+              <span class="filter-mark is-info"></span><span>Información</span><b id="count-info">0</b>
+            </button>
+          </nav>
+          <div class="rail-foot"><span class="nx-label">ARCHIVOS COMPROBADOS</span><strong class="nx-num" id="file-count">0</strong></div>
+        </aside>
+
+        <section class="doctor-report">
+          <header class="report-head">
+            <div><span class="nx-label">RESULTADO DE LA REVISIÓN</span><h1 class="nx-title">HALLAZGOS</h1></div>
+            <label class="nx-input doctor-search">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.8" cy="6.8" r="4.6"/><path d="m10.3 10.3 3.4 3.4"/></svg>
+              <input id="search" type="search" placeholder="Buscar recurso o problema" autocomplete="off" aria-label="Buscar hallazgo">
+            </label>
+          </header>
+          <div id="findings" class="doctor-findings nx-scroll" aria-live="polite"></div>
+          <footer class="doctor-footer"><span><span id="hidden"></span> · <span id="visible-count">0 hallazgos</span></span><span><kbd>ESC</kbd> CERRAR</span></footer>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

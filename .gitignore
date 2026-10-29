@@ -1,0 +1,4 @@
+# Carpetas y archivos que no se publican
+node_modules/
+*.log
+.DS_Store

@@ -1,0 +1,70 @@
+NX_ServerDoctor - Licencia de uso gratuito / Free use license
+Copyright (c) 2026 Nxsty. Todos los derechos reservados. All rights reserved.
+Identificador de la versión / Build identifier: NXSTY-SD-DCF3EF4A
+
+==============================================================================
+ESPAÑOL
+==============================================================================
+
+NX_ServerDoctor ("el Software") es gratuito, pero NO es software libre ni de
+código abierto. Que el código se pueda leer no da permiso para copiarlo,
+venderlo ni redistribuirlo.
+
+SE PERMITE, sin coste:
+  1. Descargar el Software desde su repositorio oficial de Nxsty.
+  2. Instalarlo y usarlo en tus propios servidores de FiveM, públicos o
+     privados.
+  3. Cambiar config.lua y hacer cambios privados para tu propio servidor,
+     siempre que no los distribuyas.
+
+NO SE PERMITE, sin permiso escrito de Nxsty:
+  1. Vender, alquilar o cobrar de cualquier forma por el Software, por una
+     versión modificada o por el acceso a él (incluidas tiendas Tebex,
+     paquetes de pago, suscripciones, "packs" de servidor o donaciones a
+     cambio del archivo).
+  2. Redistribuir, resubir o publicar el Software, original o modificado, en
+     otros repositorios, webs, foros, servidores de Discord o páginas de
+     filtraciones. Para compartirlo, enlaza el repositorio oficial.
+  3. Quitar, ocultar o cambiar la autoría, los créditos, este aviso, el
+     identificador de la versión o cualquier marca del autor incluida en el
+     Software.
+  4. Presentar el Software, o una obra basada en él, como propia.
+  5. Usar el código, o partes de él, en otro proyecto que se distribuya.
+
+Cualquier uso que incumpla estas condiciones anula automáticamente el
+permiso de uso.
+
+EL SOFTWARE SE ENTREGA "TAL CUAL", SIN GARANTÍAS DE NINGÚN TIPO. EL AUTOR NO
+RESPONDE DE NINGÚN DAÑO O PROBLEMA DERIVADO DE SU USO.
+
+==============================================================================
+ENGLISH
+==============================================================================
+
+NX_ServerDoctor ("the Software") is free of charge, but it is NOT free or
+open source software. Being able to read the code does not grant permission
+to copy, sell or redistribute it.
+
+YOU MAY, at no cost:
+  1. Download the Software from Nxsty's official repository.
+  2. Install and use it on your own FiveM servers, public or private.
+  3. Edit config.lua and make private changes for your own server, as long
+     as you do not distribute them.
+
+YOU MAY NOT, without written permission from Nxsty:
+  1. Sell, rent or charge in any way for the Software, a modified version or
+     access to it (including Tebex stores, paid bundles, subscriptions,
+     server packs or donations in exchange for the file).
+  2. Redistribute, re-upload or publish the Software, original or modified,
+     on other repositories, websites, forums, Discord servers or leak sites.
+     To share it, link the official repository.
+  3. Remove, hide or change the authorship, credits, this notice, the build
+     identifier or any author mark included in the Software.
+  4. Present the Software, or a work based on it, as your own.
+  5. Use the code, or parts of it, in another project that is distributed.
+
+Any use that breaks these terms automatically ends your permission to use
+the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. THE AUTHOR IS
+NOT LIABLE FOR ANY DAMAGE OR ISSUE ARISING FROM ITS USE.
