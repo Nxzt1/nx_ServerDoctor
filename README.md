@@ -1,123 +1,125 @@
 # NX_ServerDoctor
 
-Hecho por **Nxsty**. Gratis, pero no es de código abierto: lee la [licencia](LICENSE) antes de compartirlo.
+Made by **Nxsty**. Free to use, but not open source: read the [license](LICENSE) before sharing it.
 
-Recurso gratuito​‌​​‌‌‌​​‌​‌‌​​​​‌​‌​​‌‌​‌​‌​‌​​​‌​‌‌​​‌ para servidores de FiveM que revisa la configuración y explica en lenguaje claro lo que está mal y cómo arreglarlo.
+A free resource​‌​​‌‌‌​​‌​‌‌​​​​‌​‌​​‌‌​‌​‌​‌​​​‌​‌‌​​‌ for FiveM servers that reviews your configuration and explains, in plain language, what is wrong and how to fix it.
 
-- **Solo lectura.** No cambia archivos, variables, permisos, recursos ni la base de datos. Nunca repara nada por su cuenta: te dice qué hacer y tú decides.
-- **Sin conexiones externas.** No hace conexiones externas, no tiene telemetría ni analítica. El análisis de errores lee localmente el tramo configurado de `fxserver.log` y muestra mensajes saneados solo en el informe solicitado.
-- **Sin dependencias externas.** No necesita framework, base de datos, ox_lib ni Node.js. El panel usa HTML, CSS y JavaScript locales.
-- **Coste mínimo en reposo.** No tiene bucles ni temporizadores. La pequeña página NUI queda cargada, pero solo dibuja el informe al solicitarlo; las comprobaciones se ejecutan con `/nxcheck` o una vez al iniciar si lo dejas activado.
+- **Read-only.** It never changes files, variables, permissions, resources or the database. It never repairs anything on its own: it tells you what to do and you decide.
+- **No external connections.** No telemetry, no analytics. The error scan reads the configured slice of `fxserver.log` locally and only shows sanitized messages in the report you asked for.
+- **No external dependencies.** No framework, database, ox_lib or Node.js required. The panel uses local HTML, CSS and JavaScript.
+- **Minimal idle cost.** No loops or timers. The small NUI page stays loaded but only draws the report when requested; the checks run with `/nxcheck` or once at startup if you leave that enabled.
 
-> **Nota:** el código del servidor viene minificado/ofuscado a propósito para proteger la autoría. Funciona igual, pero no está pensado para editarse. El único archivo que debes tocar es `config.lua`, que se deja legible. Si necesitas la versión legible por algún motivo, pídemela.
+> **Note:** the server code ships minified/obfuscated on purpose, to protect authorship. It works exactly the same but is not meant to be edited. The only file you should touch is `config.lua`, which is left readable.
 
-## Instalación
+## Installation
 
-1. Copia la carpeta `NX_ServerDoctor` dentro de `resources` (en cualquier subcarpeta, por ejemplo `resources/[admin]/NX_ServerDoctor`).
-2. Añade a `server.cfg`, **después** del resto de recursos para que la revisión al iniciar los encuentre ya arrancados:
+1. Copy the `NX_ServerDoctor` folder into `resources` (any subfolder works, e.g. `resources/[admin]/NX_ServerDoctor`).
+2. Add it to `server.cfg`, **after** your other resources so the startup review finds them already started:
 
    ```cfg
    ensure NX_ServerDoctor
    ```
 
-3. Da permiso a tu grupo de administración (mira `permissions.example.cfg`):
+3. Grant access to your admin group (see `permissions.example.cfg`):
 
    ```cfg
    add_ace group.admin nxdoctor.use allow
    ```
 
-4. Reinicia el servidor o, en la consola del servidor ya encendido, ejecuta `refresh` y `ensure NX_ServerDoctor`.
+4. Restart the server, or on the running console run `refresh` and `ensure NX_ServerDoctor`.
 
-## Comandos
+## Commands
 
-| Comando | Qué hace |
+| Command | What it does |
 |---|---|
-| `/nxcheck` | Ejecuta la revisión completa y abre el panel visual. |
-| `/nxcheck ui` | Ejecuta la revisión completa y abre el panel visual. |
-| `/nxcheck chat` | Muestra el informe por el chat. |
-| `/nxcheck <id>` | Ejecuta solo una comprobación, por ejemplo `/nxcheck imagenes`. |
-| `/nxcheck lista` | Muestra las comprobaciones y si están activas. |
-| `/nxcheck ver [página]` | Vuelve a mostrar el último informe (el chat va por páginas). |
-| `/nxcheck consola` | Copia el último informe en la consola del servidor, para poder copiarlo y pegarlo. |
-| `/nxcheck ayuda` | Muestra esta ayuda. |
+| `/nxcheck` | Runs the full review and opens the visual panel (UI). |
+| `/nxcheck ui` | Same: full review and visual panel. |
+| `/nxcheck chat` | Shows the whole report in the chat instead of the panel. |
+| `/nxcheck <id>` | Runs a single check, e.g. `/nxcheck imagenes`. |
+| `/nxcheck lista` (alias `list`) | Lists the checks and whether they are enabled. |
+| `/nxcheck ver [page]` (alias `show`) | Shows the last report again (chat is paged). |
+| `/nxcheck consola` (alias `console`) | Copies the last report to the server console so you can copy-paste it. |
+| `/nxcheck ayuda` (alias `help`) | Shows this help. |
 
-En la consola del servidor (o en la de txAdmin) se escribe sin barra: `nxcheck`. La consola siempre tiene permiso y recibe el informe completo; en el chat se muestra por páginas de `Config.Chat.perPage` hallazgos.
+In short: **`/nxcheck` opens the UI panel, and `/nxcheck chat` prints everything in the chat.**
 
-`erroreslog` busca errores ya escritos por FXServer en el log de txAdmin; el informe completo lo incluye automáticamente. Si no encuentra el archivo, configura su ruta absoluta en `Config.LogAudit.path`. También puedes ejecutarlo por separado con `/nxcheck erroreslog`.
+From the server console (or txAdmin's), type it without a slash: `nxcheck`. The console always has permission and gets the full report; in chat it is paged in groups of `Config.Chat.perPage` findings.
 
-### Panel visual
+`erroreslog` looks for errors already written by FXServer in the txAdmin log; the full report includes it automatically. If it cannot find the file, set its absolute path in `Config.LogAudit.path`. You can also run it on its own with `/nxcheck erroreslog`.
 
-El panel forma parte de `NX_ServerDoctor`: `/nxcheck` lo abre directamente, y `/nxcheck chat` conserva la salida de texto. Está hecho con HTML, CSS y JavaScript locales, sin React, dependencias externas, sondeos ni temporizadores. Reutiliza localmente la paleta y tipografía de NX; la fuente Oswald se incluye bajo su licencia OFL en `html/fonts/OFL.txt`. La página NUI permanece cargada en el cliente para poder abrirse, pero no mantiene trabajo activo en reposo.
+### Visual panel
 
-## Permisos
+The panel is part of `NX_ServerDoctor`: `/nxcheck` opens it directly, and `/nxcheck chat` keeps the text output. It is built with local HTML, CSS and JavaScript, with no React, external dependencies, polling or timers. It reuses the NX palette and typography locally; the Oswald font is included under its OFL license in `html/fonts/OFL.txt`. The NUI page stays loaded on the client so it can open, but keeps no active work while idle.
 
-El comando se registra sin restricción de FiveM y el propio recurso comprueba en el servidor, en cada uso, que quien lo pide tiene el permiso `Config.Permission.ace` (por defecto `nxdoctor.use`). El servidor envía el informe solo al administrador autorizado que lo solicitó; la NUI no tiene callbacks para ejecutar comprobaciones ni acciones del servidor.
+## Permissions
+
+The command is registered without a FiveM restriction, and the resource itself checks on the server, on every use, that the requester has the `Config.Permission.ace` permission (default `nxdoctor.use`). The server sends the report only to the authorized admin who requested it; the NUI has no callbacks that run checks or server actions.
 
 ```cfg
-# Recomendado: solo tu grupo de administración
+# Recommended: your admin group only
 add_ace group.admin nxdoctor.use allow
 
-# A una persona concreta (pon su identificador real en lugar del de ejemplo)
+# A specific person (use their real identifier instead of the example)
 add_principal identifier.license:0000000000000000000000000000000000000000 group.admin
 ```
 
-## Configuración
+## Configuration
 
-Todo está en `config.lua`, comentado. Lo más habitual:
+Everything is in `config.lua`, commented. The most common options:
 
-| Opción | Por defecto | Para qué |
+| Option | Default | Purpose |
 |---|---|---|
-| `Config.Command` | `'nxcheck'` | Nombre del comando. |
-| `Config.Permission.ace` | `'nxdoctor.use'` | Permiso ACE necesario. |
-| `Config.Permission.principals` | `{ 'group.admin' }` | Grupos que deberían tenerlo (solo para avisarte si no lo tiene ninguno). |
-| `Config.Detail` | `'normal'` | `'resumen'`, `'normal'` o `'completo'`. |
-| `Config.UiBps` | `100000` | Bytes por segundo con los que se envía el informe al panel (evento latente). |
-| `Config.RunOnStart` | `true` | Revisión automática una vez al iniciar, solo en la consola. |
-| `Config.Checks.<id>` | ver archivo | `enabled`, `startup` y `full` para cada comprobación. |
-| `Config.Frameworks` | QBox, QBCore, ESX | Nombre del recurso principal de cada framework, por si usas otro. |
-| `Config.CheckDatabaseConvar` | `true` | Avisa si la conexión de oxmysql está vacía (ver Privacidad). |
-| `Config.Images` | ver archivo | Carpetas de imágenes de inventarios estilo QBCore y de ESX, e ítems a ignorar. |
-| `Config.NuiPaths` | `{ enabled = true, ignore = {} }` | Activa la comprobación de rutas `nui://` e ignora nombres de recursos concretos. |
-| `Config.LogAudit` | ver archivo | Ruta y límites del `fxserver.log` de txAdmin que se revisa bajo demanda. |
-| `Config.Limits` | ver archivo | Límites de recursos, archivos, imágenes y código analizado para la estimación de rendimiento. |
-| `Config.Limits.maxPerformanceFiles` | `300` | Máximo de archivos `.lua`/`.js` que analiza la estimación estática de rendimiento por revisión. |
-| `Config.UseIoForFileChecks` | `true` | Comprobar archivos abriéndolos sin leerlos (rápido) o con `LoadResourceFile` (lento). |
-| `Config.SensitivePatterns` | ver archivo | Nombres de archivo que nunca se abren. |
+| `Config.Command` | `'nxcheck'` | Command name. |
+| `Config.Permission.ace` | `'nxdoctor.use'` | Required ACE permission. |
+| `Config.Permission.principals` | `{ 'group.admin' }` | Groups that should have it (only to warn you if none does). |
+| `Config.Detail` | `'normal'` | `'resumen'` (summary), `'normal'` or `'completo'` (full). |
+| `Config.UiBps` | `100000` | Bytes per second used to send the report to the panel (latent event). |
+| `Config.RunOnStart` | `true` | Automatic review once at startup, console only. |
+| `Config.Checks.<id>` | see file | `enabled`, `startup` and `full` for each check. |
+| `Config.Frameworks` | QBox, QBCore, ESX | Main resource name of each framework, in case you use a different one. |
+| `Config.CheckDatabaseConvar` | `true` | Warns if the oxmysql connection string is empty (see Privacy). |
+| `Config.Images` | see file | Image folders for QBCore-style and ESX inventories, plus items to ignore. |
+| `Config.NuiPaths` | `{ enabled = true, ignore = {} }` | Enables the `nui://` path check and ignores specific resource names. |
+| `Config.LogAudit` | see file | Path and limits of the txAdmin `fxserver.log` read on demand. |
+| `Config.Limits` | see file | Limits on resources, files, images and code scanned for the performance estimate. |
+| `Config.Limits.maxPerformanceFiles` | `300` | Max `.lua`/`.js` files the static performance estimate scans per review. |
+| `Config.UseIoForFileChecks` | `true` | Check files by opening them without reading (fast) or with `LoadResourceFile` (slow). |
+| `Config.SensitivePatterns` | see file | File names that are never opened. |
 
-## Comprobaciones
+## Checks
 
-| Id | Qué revisa | Gravedad posible | Coste |
+| Id | What it reviews | Possible severity | Cost |
 |---|---|---|---|
-| `dependencias` | Dependencias de cada `fxmanifest.lua`: recursos que faltan, dependencias paradas de recursos iniciados, restricciones `/onesync`, `/server:N` y `/gameBuild:N`, y varios recursos iniciados que hacen `provide` del mismo nombre. | error, advertencia | Bajo: solo lee los metadatos que FiveM ya tiene en memoria. |
-| `manifiestos` | Scripts, `files` y `ui_page` declarados que no existen; imports `@recurso/archivo` rotos o sin declarar como dependencia; `__resource.lua`, falta de `fx_version` o `game`, `fx_version` antigua y falta de `lua54 'yes'`. | error, advertencia, información | Medio: mira si existe cada archivo declarado (hasta `maxFilesPerResource` por recurso y `maxFileChecks` en total). |
-| `permisos` | Si alguien tiene el permiso del recurso, si `builtin.everyone` (todos los jugadores) lo tiene, y si tiene `command` o comandos de administración como `quit`, `stop`, `exec`, `add_ace`... | error, advertencia | Muy bajo. |
-| `framework` | Detecta QBox, QBCore o ESX. Avisa de varios frameworks instalados, recurso principal parado, dependencias del framework sin iniciar, QBox sin OneSync, `inventory:framework` de ox_inventory que no coincide y conexión de oxmysql vacía. | error, advertencia, información | Muy bajo. |
-| `imagenes` | Ítems sin imagen en la carpeta del inventario; advierte si `inventory:imagepath` usa un nombre resuelto solo por `provide`. También detecta extensiones alternativas comunes. | advertencia, información | Más alto: revisa hasta `maxImageChecks` ítems. Se incluye en `/nxcheck` bajo demanda, pero no en el arranque automático. |
-| `rendimiento` | Ordena hasta cinco recursos candidatos según patrones estáticos como `Wait(0/1)` junto a bucles, `setTick`/`setInterval` y dibujo frecuente. Explica por qué cada uno merece medirse. No afirma que sean los de mayor CPU real. | información | Bajo/medio: lee hasta `maxPerformanceFiles` archivos de código declarados con `LoadResourceFile`; solo corre bajo demanda. |
-| `rutasnui` | Rutas literales `nui://` en archivos declarados por los manifiestos. Avisa si el recurso destino falta, solo existe mediante `provide` o si el archivo no existe; detecta alternativas `.png`, `.webp` y `.jpg`. | advertencia, información | Bajo/medio: lee bajo demanda archivos declarados `.lua`, `.js`, `.html`, `.htm` y `.css`, sujeto a los límites de recursos y archivos. |
-| `erroreslog` | Busca errores de script y exports ausentes en el tramo reciente del `fxserver.log` de txAdmin. Agrupa duplicados y muestra recurso, archivo/línea y mensaje. | error, información | Bajo: lee hasta 2 MB al ejecutar `/nxcheck`; no se ejecuta al arrancar. |
+| `dependencias` | Each `fxmanifest.lua`'s dependencies: missing resources, stopped dependencies of started resources, `/onesync`, `/server:N` and `/gameBuild:N` restrictions, and several started resources that `provide` the same name. | error, warning | Low: only reads metadata FiveM already has in memory. |
+| `manifiestos` | Declared scripts, `files` and `ui_page` that do not exist; broken `@resource/file` imports or ones not declared as a dependency; `__resource.lua`, missing `fx_version` or `game`, old `fx_version`, and missing `lua54 'yes'`. | error, warning, info | Medium: checks whether each declared file exists (up to `maxFilesPerResource` per resource and `maxFileChecks` total). |
+| `permisos` | Whether anyone has the resource permission, whether `builtin.everyone` (all players) has it, and whether it has `command` or admin commands like `quit`, `stop`, `exec`, `add_ace`... | error, warning | Very low. |
+| `framework` | Detects QBox, QBCore or ESX. Warns about several frameworks installed, a stopped core resource, framework dependencies not started, QBox without OneSync, an `inventory:framework` that does not match ox_inventory, and an empty oxmysql connection string. | error, warning, info | Very low. |
+| `imagenes` | Items with no image in the inventory folder; warns if `inventory:imagepath` uses a name resolved only via `provide`. Also detects common alternative extensions. | warning, info | Higher: scans up to `maxImageChecks` items. Included in `/nxcheck` on demand, but not at startup. |
+| `rendimiento` | Ranks up to five candidate resources by static patterns like `Wait(0/1)` next to loops, `setTick`/`setInterval` and frequent drawing. Explains why each one is worth measuring. It does not claim they are the real top CPU users. | info | Low/medium: reads up to `maxPerformanceFiles` declared code files with `LoadResourceFile`; only runs on demand. |
+| `rutasnui` | Literal `nui://` paths in files declared by the manifests. Warns if the target resource is missing, exists only via `provide`, or the file does not exist; detects `.png`, `.webp` and `.jpg` alternatives. | warning, info | Low/medium: reads declared `.lua`, `.js`, `.html`, `.htm` and `.css` files on demand, subject to the resource and file limits. |
+| `erroreslog` | Looks for script errors and missing exports in the recent slice of the txAdmin `fxserver.log`. Groups duplicates and shows resource, file/line and message. | error, info | Low: reads up to 2 MB when you run `/nxcheck`; does not run at startup. |
 
-### Gravedades
+### Severities
 
-- **error**: el problema está confirmado y algo no funciona o es un riesgo de seguridad.
-- **advertencia**: el hecho está confirmado, pero puede que no te afecte (por ejemplo, falta una dependencia de un recurso que no usas).
-- **información**: recomendaciones y datos útiles.
+- **error**: the problem is confirmed and something is broken or a security risk.
+- **warning**: the fact is confirmed, but it may not affect you (for example, a missing dependency of a resource you do not use).
+- **info**: recommendations and useful facts.
 
-Si algo no se puede confirmar, no se informa como error.
+If something cannot be confirmed, it is not reported as an error.
 
-### Compatibilidad por framework
+### Framework compatibility
 
-| Comprobación | Independiente | QBox | QBCore | ESX |
+| Check | Standalone | QBox | QBCore | ESX |
 |---|---|---|---|---|
-| dependencias, manifiestos, permisos, rendimiento | Sí | Sí | Sí | Sí |
-| framework | Solo dice que no hay framework | Sí | Sí | Sí |
-| erroreslog | Si existe un `fxserver.log` de txAdmin | Sí | Sí | Sí |
-| rutasnui | Sí | Sí | Sí | Sí |
-| imagenes | Si usa ox_inventory | Sí (ox_inventory) | Sí (ox_inventory o inventario configurado en `Config.Images.qbInventories`) | Sí (ox_inventory o inventario configurado en `Config.Images.esxInventories`) |
+| dependencias, manifiestos, permisos, rendimiento | Yes | Yes | Yes | Yes |
+| framework | Only reports there is no framework | Yes | Yes | Yes |
+| erroreslog | If a txAdmin `fxserver.log` exists | Yes | Yes | Yes |
+| rutasnui | Yes | Yes | Yes | Yes |
+| imagenes | If using ox_inventory | Yes (ox_inventory) | Yes (ox_inventory or the inventory set in `Config.Images.qbInventories`) | Yes (ox_inventory or the inventory set in `Config.Images.esxInventories`) |
 
-**Compatibilidad:** el recurso está diseñado para QBox, QBCore, ESX e instalaciones independientes. Algunas comprobaciones dependen de los recursos y metadatos presentes en cada servidor.
+**Compatibility:** the resource is designed for QBox, QBCore, ESX and standalone installs. Some checks depend on the resources and metadata present on each server.
 
-## Ejemplo de informe (ficticio)
+## Example report (fictional)
 
 ```text
 NX_ServerDoctor · 2 errores, 1 advertencias, 2 informaciones
@@ -132,53 +134,53 @@ Comprobaciones: dependencias, manifiestos, permisos, framework, rendimiento · 8
 [ADVERTENCIA] Falta el recurso mi_libreria (mi_hud/fxmanifest.lua)
    Por qué importa: Lo piden 1 recurso(s) que no están iniciados: mi_hud. Mientras falte, FiveM no los dejará arrancar.
    1) Si usas esos recursos, instala mi_libreria en la carpeta resources y añade "ensure mi_libreria" antes que ellos.
-   2) Si no los usas, puedes ignorar este aviso o quitarlos del servidor.
 [INFO] Framework detectado: QBox (qbx_core, iniciado) (qbx_core)
-[INFO] El tiempo de cada recurso no se puede medir desde un script (-)
 ```
 
-## Privacidad y seguridad
+> The in-game report text is in Spanish (see Limitations).
 
-- Las ubicaciones se muestran siempre relativas al recurso (`recurso/archivo`). Antes de mostrar cualquier texto se quitan rutas absolutas, IPs e identificadores tipo `license:...`, por si alguno se colara.
-- Al analizar recursos, nunca se abre un archivo cuyo nombre coincida con `Config.SensitivePatterns` (`secrets`, `.env`, `.cfg`, `.key`, `.pem`, `token`, `password`...), ni siquiera para ver si existe. Tampoco se lee `server.cfg`. La única lectura de logs es la excepción explícita `erroreslog`, limitada al archivo `fxserver.log` configurado.
-- Para comprobar si un archivo declarado existe se abre y se cierra sin leerlo. Los archivos de código inspeccionados por `rendimiento` y `rutasnui` se leen en memoria, con límites; no se ejecutan ni se guardan. El contenido del log tampoco se guarda.
-- La comprobación de oxmysql solo mira si `mysql_connection_string` está vacía; el valor no se guarda, no se compara con nada más y no se muestra. Puedes desactivarla con `Config.CheckDatabaseConvar = false`.
-- Para la lista de ítems se usa el export de lectura del inventario (`ox_inventory:Items` o `qb-core:GetCoreObject().Shared.Items`), dentro de `pcall`.
-- No se ejecutan comandos del sistema operativo.
-- El último informe se guarda en memoria (solo hallazgos) para `/nxcheck ver`; se pierde al reiniciar el recurso.
+## Privacy and security
 
-## Rendimiento y cómo medirlo
+- Locations are always shown relative to the resource (`resource/file`). Before any text is shown, absolute paths, IPs and `license:...`-style identifiers are stripped, in case one slips through.
+- When scanning resources, a file whose name matches `Config.SensitivePatterns` (`secrets`, `.env`, `.cfg`, `.key`, `.pem`, `token`, `password`...) is never opened, not even to check it exists. `server.cfg` is never read. The only log read is the explicit `erroreslog` exception, limited to the configured `fxserver.log`.
+- To check whether a declared file exists, it is opened and closed without reading it. The code files inspected by `rendimiento` and `rutasnui` are read into memory, with limits; they are never executed or stored. The log content is not stored either.
+- The oxmysql check only looks at whether `mysql_connection_string` is empty; the value is not stored, compared to anything else, or shown. You can disable it with `Config.CheckDatabaseConvar = false`.
+- The item list is obtained through the inventory's read export (`ox_inventory:Items` or `qb-core:GetCoreObject().Shared.Items`), inside a `pcall`.
+- No operating-system commands are run.
+- The last report is kept in memory (findings only) for `/nxcheck ver`; it is lost when the resource restarts.
 
-- **En reposo:** el recurso no deja ningún hilo vivo. Tras la revisión al iniciar (o con `Config.RunOnStart = false`) no ejecuta nada hasta que alguien usa el comando. Se puede verificar leyendo `server/main.lua`: no hay bucles `while` ni temporizadores.
-- **Durante una revisión:** el trabajo se corta en tramos de `Config.Limits.sliceMs` milisegundos y cede el hilo un fotograma entre tramo y tramo, para no congelar el servidor en instalaciones grandes. La duración que muestra el informe es el tiempo total de reloj, incluidas esas pausas; no es tiempo de CPU.
-- `rendimiento` da candidatos por patrones del código, no mediciones. Un `Wait(0)` o un `setTick` puede ser correcto y no demuestra por sí solo un problema.
-- `resmon 1` en F8 muestra CPU y memoria de cada recurso en el cliente. Para localizar las líneas que consumen tiempo en cliente o servidor, graba con `profiler record 500` y revisa `profiler view` o `profiler saveJSON <archivo>`.
-- **Límite real:** FiveM no ofrece a un recurso Lua una API estable para leer el tiempo de ejecución de los demás recursos. La medición real debe hacerse con el profiler/resmon; el ranking de NX_ServerDoctor es una guía para decidir qué mirar primero.
+## Performance and how to measure it
 
-## Limitaciones
+- **Idle:** the resource leaves no live thread. After the startup review (or with `Config.RunOnStart = false`) it runs nothing until someone uses the command. You can verify this by reading `server/main.lua`: no `while` loops, no timers.
+- **During a review:** work is split into `Config.Limits.sliceMs`-millisecond slices, yielding one frame between slices so large installs are not frozen. The duration shown in the report is total wall-clock time, including those pauses; it is not CPU time.
+- `rendimiento` gives candidates by code patterns, not measurements. A `Wait(0)` or a `setTick` can be correct and does not by itself prove a problem.
+- `resmon 1` (F8) shows each resource's CPU and memory on the client. To find the lines that spend time on client or server, record with `profiler record 500` and review `profiler view` or `profiler saveJSON <file>`.
+- **Real limit:** FiveM does not give a Lua resource a stable API to read other resources' run time. Real measurement must be done with the profiler/resmon; NX_ServerDoctor's ranking is a guide for deciding what to look at first.
 
-- FiveM no permite listar las reglas ACE: solo se puede preguntar si un grupo concreto tiene un permiso concreto. Por eso la comprobación de permisos pregunta por `builtin.everyone` y por los grupos de `Config.Permission.principals`.
-- No se lee `server.cfg` (puede contener claves), así que no se sabe qué recursos tienen `ensure`. Una dependencia que falta en un recurso parado se informa como advertencia, no como error, porque puede que ese recurso no lo uses. `erroreslog` sí lee localmente hasta `Config.LogAudit.maxBytes` del final de `fxserver.log`, bajo demanda; no transmite el archivo ni guarda su contenido.
-- Las entradas con comodines (`client/*.lua`) no se pueden comprobar sin listar carpetas y se saltan.
-- En Windows los nombres de archivo no distinguen mayúsculas: un `Client.lua` declarado como `client.lua` pasa la comprobación aunque fallaría en Linux.
-- La revisión completa cubre problemas detectables con los metadatos y archivos declarados disponibles para un recurso FiveM. No puede prometer encontrar todos los fallos posibles: no lee `server.cfg`, archivos sensibles ni la base de datos, ni puede reproducir todos los errores que dependen de jugadores, red o estado del juego. La comprobación `erroreslog` es una excepción deliberada: lee únicamente el tramo reciente del log configurado y sanea los datos antes de mostrarlos.
-- No captura errores en vivo: `erroreslog` los recupera del `fxserver.log` de txAdmin cuando existe. Detecta la ruta habitual automáticamente; si el perfil o la instalación están en otra ubicación, configura `Config.LogAudit.path`. Sin archivo de registro, FXServer no permite recuperar mensajes que ya imprimió en la consola.
-- ox_inventory no guarda en el servidor la imagen personalizada de cada ítem (`client.image`), así que se busca `<nombre>.png`. Si un ítem usa otra imagen, añádelo a `Config.Images.ignore`.
-- Los mensajes están en español.
+## Limitations
 
-## Solución de problemas
+- FiveM does not allow listing ACE rules: you can only ask whether a specific group has a specific permission. That is why the permission check asks about `builtin.everyone` and the groups in `Config.Permission.principals`.
+- `server.cfg` is not read (it may contain keys), so it is not known which resources have `ensure`. A missing dependency of a stopped resource is reported as a warning, not an error, because you may not use that resource. `erroreslog` does read up to `Config.LogAudit.maxBytes` from the end of `fxserver.log` locally, on demand; it never transmits or stores the file.
+- Wildcard entries (`client/*.lua`) cannot be checked without listing folders and are skipped.
+- On Windows, file names are case-insensitive: a `Client.lua` declared as `client.lua` passes the check even though it would fail on Linux.
+- The full review covers problems detectable from the metadata and declared files available to a FiveM resource. It cannot promise to find every possible bug: it does not read `server.cfg`, sensitive files or the database, and cannot reproduce every error that depends on players, network or game state. `erroreslog` is a deliberate exception: it reads only the recent slice of the configured log and sanitizes the data before showing it.
+- It does not capture live errors: `erroreslog` recovers them from the txAdmin `fxserver.log` when it exists. It auto-detects the usual path; if the profile or install is elsewhere, set `Config.LogAudit.path`. Without a log file, FXServer does not let a resource recover messages it already printed to the console.
+- ox_inventory does not store each item's custom image on the server (`client.image`), so `<name>.png` is searched for. If an item uses a different image, add it to `Config.Images.ignore`.
+- The in-game and report messages are in Spanish.
 
-| Problema | Solución |
+## Troubleshooting
+
+| Problem | Solution |
 |---|---|
-| "No tienes permiso para usar este comando." | Añade `add_ace group.admin nxdoctor.use allow` y comprueba que tu identificador está en `group.admin`. Prueba antes desde la consola del servidor con `nxcheck permisos`. |
-| No aparece nada en el chat. | El recurso envía el evento `chat:addMessage`. Si tu chat usa otro, cámbialo en `Config.Chat.event`, o usa la consola del servidor. |
-| "Espera N s antes de repetir la revisión." | Es el tiempo de espera de `Config.Cooldown` para no repetir revisiones seguidas. |
-| La revisión al iniciar dice que faltan recursos que sí tienes. | Pon `ensure NX_ServerDoctor` al final de `server.cfg` o sube `Config.StartDelaySeconds`. |
-| "La comprobación X falló y se saltó." | El resto del informe es válido. Abre una incidencia con ese mensaje (revisa antes que no contenga datos de tu servidor). |
-| Muchos avisos de imágenes de ítems que sí se ven en el juego. | Seguramente esos ítems usan una imagen con otro nombre; añádelos a `Config.Images.ignore`. |
+| "No tienes permiso para usar este comando." (no permission) | Add `add_ace group.admin nxdoctor.use allow` and check your identifier is in `group.admin`. Try first from the server console with `nxcheck permisos`. |
+| Nothing shows in chat. | The resource sends the `chat:addMessage` event. If your chat uses another, change it in `Config.Chat.event`, or use the server console. |
+| "Espera N s antes de repetir la revisión." (cooldown) | It is the `Config.Cooldown` wait time, to avoid back-to-back reviews. |
+| The startup review says resources are missing that you do have. | Put `ensure NX_ServerDoctor` at the end of `server.cfg`, or raise `Config.StartDelaySeconds`. |
+| "La comprobación X falló y se saltó." (a check failed) | The rest of the report is valid. Open an issue with that message (check first it contains no data from your server). |
+| Many warnings about item images that do show in-game. | Those items probably use an image with a different name; add them to `Config.Images.ignore`. |
 
-## Licencia
+## License
 
-Copyright (c) 2026 Nxsty. Todos los derechos reservados.
+Copyright (c) 2026 Nxsty. All rights reserved.
 
-Uso gratuito en tus propios servidores. **No se permite venderlo, resubirlo, redistribuirlo (original o modificado) ni quitar los créditos.** Para compartirlo, enlaza este repositorio. Condiciones completas, en español e inglés, en `LICENSE`.
+Free to use on your own servers. **You may not sell it, re-upload it, redistribute it (original or modified), or remove the credits.** To share it, link this repository. Full terms, in Spanish and English, in `LICENSE`.
